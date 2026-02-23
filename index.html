@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NW Scales | Web Development Duo</title>
+    <meta name="description" content="NW Scales is a web development duo dedicated to building high-performance websites for modern businesses.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS (via CDN for single-file deployment) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#eef2ff',
+                            100: '#e0e7ff',
+                            400: '#818cf8',
+                            500: '#6366f1',
+                            600: '#4f46e5',
+                            900: '#312e81',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Styles & Utilities */
+        body {
+            background-color: #0f172a; /* tailwind slate-900 */
+            color: #f8fafc; /* tailwind slate-50 */
+            overflow-x: hidden;
+        }
+        
+        .bg-grid {
+            background-size: 40px 40px;
+            background-image: linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+            mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+        }
+
+        .text-gradient {
+            background: linear-gradient(to right, #818cf8, #c084fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Hide elements initially for GSAP to animate */
+        .gsap-reveal {
+            opacity: 0;
+            visibility: hidden;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-brand-500 selection:text-white relative">
+
+    <!-- Background Grid -->
+    <div class="absolute inset-0 z-0 pointer-events-none bg-grid h-screen w-full"></div>
+    
+    <!-- Glow Effects -->
+    <div class="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-brand-600/20 blur-[120px] pointer-events-none z-0"></div>
+    <div class="absolute top-[20%] right-[-10%] w-[30%] h-[40%] rounded-full bg-purple-600/20 blur-[120px] pointer-events-none z-0"></div>
+
+    <!-- Navigation -->
+    <nav class="relative z-50 w-full px-6 py-6 mx-auto max-w-7xl flex justify-between items-center hero-anim">
+        <div class="text-2xl font-bold tracking-tighter flex items-center gap-2">
+            <svg class="w-8 h-8 text-brand-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+            NW <span class="text-brand-400">Scales</span>
+        </div>
+        <div>
+            <a href="mailto:nwscaling@gmail.com" class="px-5 py-2.5 text-sm font-medium text-white bg-white/10 border border-white/20 rounded-full hover:bg-white/20 transition-all duration-300 backdrop-blur-md">
+                Let's Talk
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <main class="relative z-10 flex flex-col justify-center min-h-[85vh] px-6 mx-auto max-w-7xl">
+        <div class="max-w-4xl pt-12 md:pt-20">
+            <div class="inline-flex items-center gap-2 px-3 py-1 mb-6 text-sm font-medium rounded-full bg-brand-500/10 text-brand-400 border border-brand-500/20 hero-anim">
+                <span class="w-2 h-2 rounded-full bg-brand-400 animate-pulse"></span>
+                Web Development Duo
+            </div>
+            <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight leading-[1.1] mb-6 hero-anim">
+                We build websites that <br class="hidden md:block" />
+                <span class="text-gradient">scale your business.</span>
+            </h1>
+            <p class="text-lg md:text-xl text-slate-400 mb-10 max-w-2xl leading-relaxed hero-anim">
+                We are NW Scales. A dedicated two-person development team crafting fast, stunning, and conversion-optimized websites for businesses ready to grow—at a fraction of agency prices.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 hero-anim">
+                <a href="mailto:nwscaling@gmail.com" class="inline-flex justify-center items-center px-8 py-4 text-base font-semibold text-white bg-brand-600 rounded-full hover:bg-brand-500 transition-all duration-300 shadow-[0_0_20px_rgba(99,102,241,0.4)] hover:shadow-[0_0_30px_rgba(99,102,241,0.6)] hover:-translate-y-1">
+                    Start Your Project
+                </a>
+                <a href="#services" class="inline-flex justify-center items-center px-8 py-4 text-base font-semibold text-white bg-transparent border border-slate-700 rounded-full hover:bg-slate-800 transition-all duration-300">
+                    See Our Work
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Services Section -->
+    <section id="services" class="relative z-10 py-24 bg-slate-900/50 border-y border-slate-800 backdrop-blur-sm">
+        <div class="px-6 mx-auto max-w-7xl">
+            <div class="text-center mb-16 gsap-reveal section-header">
+                <h2 class="text-3xl md:text-5xl font-bold mb-4">What we do best.</h2>
+                <p class="text-slate-400 max-w-2xl mx-auto">As a specialized duo, we handle everything from design to deployment, delivering premium agency-quality results without the inflated price tag.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <div class="p-8 rounded-3xl bg-slate-800/50 border border-slate-700 hover:border-brand-500/50 transition-colors duration-300 gsap-reveal service-card">
+                    <div class="w-14 h-14 mb-6 rounded-2xl bg-brand-500/20 flex items-center justify-center text-brand-400">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-white">Custom Web Design</h3>
+                    <p class="text-slate-400 leading-relaxed">Unique, brand-tailored designs that capture your audience's attention and stand out from the competition. No boring templates.</p>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="p-8 rounded-3xl bg-slate-800/50 border border-slate-700 hover:border-brand-500/50 transition-colors duration-300 gsap-reveal service-card">
+                    <div class="w-14 h-14 mb-6 rounded-2xl bg-purple-500/20 flex items-center justify-center text-purple-400">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-white">Modern Development</h3>
+                    <p class="text-slate-400 leading-relaxed">Lightning-fast, responsive websites built with the latest technologies. Optimized for mobile, desktop, and everywhere in between.</p>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="p-8 rounded-3xl bg-slate-800/50 border border-slate-700 hover:border-brand-500/50 transition-colors duration-300 gsap-reveal service-card">
+                    <div class="w-14 h-14 mb-6 rounded-2xl bg-emerald-500/20 flex items-center justify-center text-emerald-400">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-white">SEO & Performance</h3>
+                    <p class="text-slate-400 leading-relaxed">We build with search engines in mind. High accessibility scores, semantic code, and blazing fast load times to rank higher.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why a Duo Section -->
+    <section class="relative z-10 py-24 overflow-hidden">
+        <div class="px-6 mx-auto max-w-7xl flex flex-col md:flex-row items-center gap-16">
+            <div class="w-full md:w-1/2 gsap-reveal split-text">
+                <h2 class="text-3xl md:text-5xl font-bold mb-6">Why work with a duo?</h2>
+                <p class="text-slate-400 text-lg mb-6 leading-relaxed">
+                    Large agencies have massive overhead, account managers, and red tape that drive up costs. Freelancers can get overwhelmed. As a specialized duo, we offer top-tier quality at prices significantly lower than our competitors.
+                </p>
+                <ul class="space-y-4">
+                    <li class="flex items-start gap-3">
+                        <div class="mt-1 bg-brand-500/20 p-1 rounded-full text-brand-400">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                        </div>
+                        <span class="text-slate-300 font-medium text-lg">Way better pricing than traditional agencies</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <div class="mt-1 bg-brand-500/20 p-1 rounded-full text-brand-400">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                        </div>
+                        <span class="text-slate-300 font-medium text-lg">Direct communication with the creators</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <div class="mt-1 bg-brand-500/20 p-1 rounded-full text-brand-400">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                        </div>
+                        <span class="text-slate-300 font-medium text-lg">Faster turnaround times & agile workflow</span>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="w-full md:w-1/2 relative gsap-reveal split-img">
+                <!-- Abstract Representation of a Duo -->
+                <div class="aspect-square max-w-md mx-auto relative">
+                    <div class="absolute inset-0 bg-gradient-to-tr from-brand-600 to-purple-600 rounded-3xl transform rotate-3 opacity-50 blur-lg"></div>
+                    <div class="absolute inset-0 bg-slate-800 border border-slate-700 rounded-3xl p-8 flex flex-col justify-center items-center gap-8 relative overflow-hidden">
+                        <div class="absolute top-0 right-0 w-32 h-32 bg-brand-500/20 rounded-full blur-2xl"></div>
+                        <div class="absolute bottom-0 left-0 w-32 h-32 bg-purple-500/20 rounded-full blur-2xl"></div>
+                        
+                        <div class="flex items-center justify-center gap-6 z-10 w-full">
+                            <!-- Dev 1 shape -->
+                            <div class="w-24 h-24 rounded-2xl bg-gradient-to-br from-brand-400 to-brand-600 flex items-center justify-center shadow-lg shadow-brand-500/30 transform hover:scale-105 transition-transform duration-500">
+                                <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
+                            </div>
+                            <!-- Connection -->
+                            <div class="h-1 flex-1 bg-slate-700 relative overflow-hidden rounded-full">
+                                <div class="absolute top-0 bottom-0 left-0 w-full bg-brand-400 animate-[translate_2s_linear_infinite]" style="background: linear-gradient(90deg, transparent, #818cf8, transparent); transform: translateX(-100%);"></div>
+                            </div>
+                            <!-- Dev 2 shape -->
+                            <div class="w-24 h-24 rounded-full bg-gradient-to-br from-purple-400 to-purple-600 flex items-center justify-center shadow-lg shadow-purple-500/30 transform hover:scale-105 transition-transform duration-500">
+                                <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5z"></path></svg>
+                            </div>
+                        </div>
+                        <div class="text-center z-10 mt-4">
+                            <h4 class="text-xl font-bold text-white">The Perfect Match</h4>
+                            <p class="text-sm text-slate-400">Design & Engineering</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="relative z-10 py-24 px-6">
+        <div class="max-w-5xl mx-auto bg-gradient-to-br from-slate-800 to-slate-900 border border-slate-700 rounded-[2rem] p-10 md:p-20 text-center relative overflow-hidden gsap-reveal cta-box">
+            <!-- decorative background -->
+            <div class="absolute top-[-50%] left-[-10%] w-[50%] h-[100%] bg-brand-500/20 blur-[100px] rounded-full pointer-events-none"></div>
+            <div class="absolute bottom-[-50%] right-[-10%] w-[50%] h-[100%] bg-purple-500/20 blur-[100px] rounded-full pointer-events-none"></div>
+            
+            <h2 class="text-4xl md:text-6xl font-bold mb-6 relative z-10">Ready to scale up?</h2>
+            <p class="text-xl text-slate-400 mb-10 max-w-2xl mx-auto relative z-10">
+                Get a premium website without the premium price tag. Let's discuss your project and see how much you can save compared to an agency. Send us an email and we'll get back to you within 24 hours.
+            </p>
+            <a href="mailto:nwscaling@gmail.com" class="relative z-10 inline-flex items-center gap-3 px-10 py-5 text-lg font-semibold text-slate-900 bg-white rounded-full hover:bg-brand-50 hover:scale-105 transition-all duration-300">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                nwscaling@gmail.com
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="relative z-10 border-t border-slate-800 bg-slate-950 py-10 mt-12">
+        <div class="px-6 mx-auto max-w-7xl flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="text-xl font-bold tracking-tighter flex items-center gap-2">
+                NW <span class="text-brand-400">Scales</span>
+            </div>
+            <p class="text-slate-500 text-sm">
+                &copy; <span id="year"></span> NW Scales. All rights reserved.
+            </p>
+            <div class="flex gap-4">
+                <a href="mailto:nwscaling@gmail.com" class="text-slate-400 hover:text-white transition-colors">Contact</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- GSAP Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
+    <script>
+        // Set dynamic year in footer
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Initialize GSAP
+        document.addEventListener("DOMContentLoaded", (event) => {
+            gsap.registerPlugin(ScrollTrigger);
+
+            // Initial Hero Animation
+            const heroTl = gsap.timeline();
+            
+            // Set initial state for elements without class 'gsap-reveal' that are part of hero
+            gsap.set(".hero-anim", { y: 30, opacity: 0 });
+            
+            heroTl.to(".hero-anim", {
+                y: 0,
+                opacity: 1,
+                duration: 1,
+                stagger: 0.15,
+                ease: "power3.out",
+                delay: 0.1
+            });
+
+            // Make sure initially hidden items are visible for scroll trigger
+            gsap.set(".gsap-reveal", { autoAlpha: 1 }); // autoAlpha handles visibility and opacity
+
+            // Services Section Animation
+            gsap.from(".section-header", {
+                scrollTrigger: {
+                    trigger: "#services",
+                    start: "top 80%",
+                },
+                y: 40,
+                opacity: 0,
+                duration: 0.8,
+                ease: "power3.out"
+            });
+
+            gsap.from(".service-card", {
+                scrollTrigger: {
+                    trigger: ".service-card",
+                    start: "top 85%",
+                },
+                y: 50,
+                opacity: 0,
+                duration: 0.8,
+                stagger: 0.2,
+                ease: "power3.out"
+            });
+
+            // Duo Section Animation
+            gsap.from(".split-text", {
+                scrollTrigger: {
+                    trigger: ".split-text",
+                    start: "top 80%",
+                },
+                x: -50,
+                opacity: 0,
+                duration: 1,
+                ease: "power3.out"
+            });
+
+            gsap.from(".split-img", {
+                scrollTrigger: {
+                    trigger: ".split-img",
+                    start: "top 80%",
+                },
+                x: 50,
+                opacity: 0,
+                duration: 1,
+                ease: "power3.out"
+            });
+
+            // CTA Section Animation
+            gsap.from(".cta-box", {
+                scrollTrigger: {
+                    trigger: ".cta-box",
+                    start: "top 85%",
+                },
+                scale: 0.95,
+                y: 40,
+                opacity: 0,
+                duration: 1,
+                ease: "elastic.out(1, 0.7)"
+            });
+            
+            // Subtle looping animation for the connector line in the duo diagram
+            const styleSheet = document.createElement("style");
+            styleSheet.innerText = `
+                @keyframes translate {
+                    0% { transform: translateX(-100%); }
+                    100% { transform: translateX(100%); }
+                }
+            `;
+            document.head.appendChild(styleSheet);
+        });
+    </script>
+</body>
+</html>
